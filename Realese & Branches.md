@@ -144,3 +144,7 @@ git branch -m feature-report feature-report-bk // git branch -m old_branch new_b
 **Que pasa si subo un branch temporal?**
 
 Este debe de ser eliminado para evitar tener una cantidad grande de branch en los repositorios online.
+
+**Que son las empresas "family"?**
+
+Son los usuarios del sistemas mas cercanos al administrador, estos prueban las nuevas funciones antes de que lleguen a produccion. Se pueden tambien describir como usuarios beta tester
