@@ -96,6 +96,16 @@ ejemplos:
   development-post-mandrill
 ```
 
+##Forma correcta de hacer commits
+
+Al hacer commit agregar descripción detallada de los cambios realizados, si estos cambios están respaldados por un task en Jira colocar delante el KEY del task separando con un guión (-) de la descripción.
+
+Ejemplos
+
+```
+	(development)$ git commit -m 'OOD-151 - Correcting problems with login'
+```
+
 #Versión
 
 Mctekk trabajara con el versionamiento mayor.menor.micro
