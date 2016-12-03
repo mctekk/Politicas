@@ -4,9 +4,9 @@
 
 Manejaremos 3 branches principales
 
-- development: Es la versión en la que vamos integrando los cambios de las mejoras. (Base de datos Falsa)
-- staging: Es la versión que se usará en las empresas "family" (BD productiva)
-- production: La versión en productivo actual (BD Productiva).
+- develop: Es la versión en la que vamos integrando los cambios estables de los branches secundarios. (Local)
+- staging: Es la versión que se usará en las empresas "family" (Semi production)
+- master: La versión en productivo actual (production).
 
 De ser necesario se agregaran mas branch dependiendo de las exigencias del proyecto
 
@@ -44,22 +44,25 @@ Ejemplos que no se deben usar:
 
 Para la unión de los branches principales se harán de la siguiente forma.
 
-merge desde los branches secundarios a development
+**Merge desde los branches secundarios a develop**
 
 ejemplo:
 ```sh
-(development)$ git merge feature-report
+(develop)$ git merge feature-report
 ```
 
-Merge desde development a staging
+**Merge desde develop a staging**
 
 ejemplo:
 ```sh
-(staging)$ git merge development
+(staging)$ git merge develop
 ```
-Merge desde staging a production (Solo project manager)
+
+**Merge desde staging a master (Solo project manager)**
+
+ejemplo:
 ```sh
-(production)$ git merge staging
+(master)$ git merge staging
 ```
 
 ##Corrección de errores en staging
@@ -80,10 +83,10 @@ Pasos:
 (staging)$ git merge hotfix-something
 ```
 
-3- merge desde development a staging ya corregido
+3- merge desde develop a staging ya corregido
 
 ```sh
-(development)$ git merge staging 
+(develop)$ git merge staging 
 ```
 
 ##Cambios grandes
@@ -92,8 +95,8 @@ Si el sistema tendrá un cambio grande se debe crear un branch, este nuevo branc
 
 ejemplos:
 ```
-  development-pre-vueToPhalcon
-  development-post-mandrill
+  develop-pre-vueToPhalcon
+  develop-post-mandrill
 ```
 
 ##Forma correcta de hacer commits
@@ -103,7 +106,7 @@ Al hacer commit agregar descripción detallada de los cambios realizados, si est
 Ejemplos
 
 ```
-	(development)$ git commit -m 'OOD-151 - Correcting problems with login'
+	(develop)$ git commit -m 'OOD-151 - Correcting problems with login'
 ```
 
 #Versión
@@ -140,7 +143,7 @@ Si, pero este solo debe de ser local y unido a uno que ya se encuentre online (s
 
 **Si hay un cambio de urgencia en el branch de producción y no esta el project manager puedo subir el cambio?**
 
-- En producción nunca debe de llegar un cambio de urgencia, todos los cambios deben pasar por development y luego staging para evitar que esto pase.
+- En producción nunca debe de llegar un cambio de urgencia, todos los cambios deben pasar por develop y luego staging para evitar que esto pase.
 - La responsabilidad es enteramente directa al project manager, en caso de que este no se encuentre buscar a otro compañero con la misma posición para buscar una solución.
 
 **Tengo conflictos con un branch ya que alguien mas publico uno con el mismo nombre, que hago?**
