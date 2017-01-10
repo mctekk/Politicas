@@ -50,9 +50,9 @@ Ejemplos:
 
 Corrección de errores en los reportes
 
-- fixe-report (correcciones generales)
-- fixe-report-sellers (correcciones a vendedores)
-- fixe-report-buyers (correcciones a compradores)
+- fix-report (correcciones generales)
+- fix-report-sellers (correcciones a vendedores)
+- fix-report-buyers (correcciones a compradores)
 
 No se debe poner el nombre a una rama que no explique con claridad para que fue creado.
 
