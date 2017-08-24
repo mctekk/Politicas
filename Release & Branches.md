@@ -1,6 +1,6 @@
-#Nombramiento de las Ramas
+# Nombramiento de las Ramas
 
-##Principales
+## Principales
 
 Manejaremos 3 ramas principales
 <table>
@@ -29,7 +29,7 @@ Manejaremos 3 ramas principales
 
 De ser necesario se agregaran más ramas dependiendo de las exigencias del proyecto
 
-##Secundarios
+## Secundarios
 
 Las ramas secundarias son aquellos que tienen una importancia para el proyecto y estos estarán dentro de los repositorios con un tiempo de vida de 1 mes luego de haberse terminado el feature, bug o hotfix. Las mismas deben ser borradas por su creador y reportárselo a su Project Manager antes de eliminarlos.
 
@@ -62,7 +62,7 @@ Ejemplos que no se deben usar:
 - bug-reported
 - fixes
 
-##Merge ramas Principales
+## Merge ramas Principales
 
 Para la unión de las ramas principales se harán de la siguiente forma.
 
@@ -84,7 +84,7 @@ Merge desde staging a production (Solo project manager)
 (production)$ git merge staging
 ```
 
-##Corrección de errores en staging
+## Corrección de errores en staging
 
 Los errores de staging son los descubiertos por los usuarios finales y deben de ser resueltos directos en el staging esta es una excepción dentro de los push online. Las ramas deben de comenzar con hotfix- para que sean fácilmente identificado como correcciones en staging.
 
@@ -108,7 +108,7 @@ Pasos:
 (development)$ git merge staging 
 ```
 
-##Cambios grandes
+## Cambios grandes
 
 Si el sistema tendrá un cambio grande se debe crear una rama, este nueva rama se nombrara "rama-pre/post-cambio" para recuperar los cambios si es necesario.
 
@@ -118,7 +118,7 @@ ejemplos:
   development-post-mandrill
 ```
 
-##Mensajes de los commits
+## Mensajes de los commits
 
 Al hacer commit agregar descripción detallada de los cambios realizados, si estos cambios están respaldados por un task en Jira colocar delante el KEY del task separando con un guión (-) de la descripción.
 
@@ -132,7 +132,7 @@ Ejemplos
 	(development)$ git commit -m 'OOD-151 - Correcting problems with login'
 ```
 
-#Versión
+# Versión
 
 MCTekk trabajara con el Versionado Semántico [semver](http://semver.org/lang/es/) (mayor.menor.parche)
 
@@ -150,7 +150,7 @@ ejemplo:
 
 Los realeses y las versiones saldrán al finalizar los sprint
 
-#FAQ
+# FAQ
 
 **Quien pude subir los cambios a producción?**
 
