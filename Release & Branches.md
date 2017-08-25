@@ -1,182 +1,167 @@
-# Nombramiento de las Ramas
+# Branch Naming
 
-## Principales
+## Primary
 
-Manejaremos 3 ramas principales
+We'll be using three main branches.
 <table>
   <thead>
     <tr>
-      <th>Rama</th>
-      <th>Descripción</th>
+      <th>Branch</th>
+      <th>Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>development</td>
-      <td>Es la versión en la que vamos integrando los cambios la aplicación (Base de datos de desarrollo)</td>
+      <td>This is the version where changes and new features are integrated to. (Connects to a development database.)</td>
     </tr>
     <tr>
       <td>staging</td>
-      <td>Es la versión de prueba que tiene los mismos cambios que producción (Copia de Base de datos de Producción)</td>
+      <td>This is the version used for testing purposes before any code is pushed into production. (Connects to the production database.)</td>
     </tr>
     <tr>
       <td>production</td>
-      <td>La versión de producción (Base de datos de Producción)</td>
+      <td>This is the production version. (Connects to a production database.)</td>
     </tr>
    
   </tbody>
 </table>
 
-De ser necesario se agregaran más ramas dependiendo de las exigencias del proyecto
+Any additional branches will be added as per requirement per project.
 
-## Secundarios
+## Secondary
 
-Las ramas secundarias son aquellos que tienen una importancia para el proyecto y estos estarán dentro de los repositorios con un tiempo de vida de 1 mes luego de haberse terminado el feature, bug o hotfix. Las mismas deben ser borradas por su creador y reportárselo a su Project Manager antes de eliminarlos.
+Secondary branches are those that poses importance for the project; such as new features, major code changes and application wide bug fixes. The life span of these branches should not be greater than 1 month and must be deleted by their creators with prior notification to the Project Manager.
 
-### Convenciones de nombramiento de las ramas
+### Branch naming conventions
 
+Examples:
+- sprint-1 (code corresponding to sprint 1)
+- feature-reports (new reports feature being developed)
+- feature-login (user authentication being developed)
+- feature-site (landing page for the project)
 
-Ejemplos
-- sprint1 (código correspondiente al sprint 1)
-- feature-report (Feature de reportes)
-- feature-login (auth de usuario)
-- feature-site (landing page del proyecto)
+## Temporary
 
-##Temporales
+Temporary branches should be named after the action being performed in them. These are to be worked locally and should only be uploaded by the developer in case they need to save the code (for example, if the developer hasn't finished his task and has to leave the office).
 
-Las ramas temporales serán nombrados con la acción que se realizan en él. Estos se deben trabajar local sin ser subidos al repositorio y es de entera responsabilidad del programador que lo creo de conservarlo o eliminarlo según crea necesario.
+Examples:
 
-Ejemplos:
+Correction to errors in reports
+- fix-reports (general fixes to reports)
+- fix-reports-sellers (fixes to reports related to sellers)
+- fix-reports-buyers (fixes to reports related to buyers)
 
-Corrección de errores en los reportes
+Branches should be named clearly as to indicate the purpose of their creation.
 
-- fix-report (correcciones generales)
-- fix-report-sellers (correcciones a vendedores)
-- fix-report-buyers (correcciones a compradores)
-
-No se debe poner el nombre a una rama que no explique con claridad para que fue creado.
-
-Ejemplos que no se deben usar:
-
+Examples of names that shouldn't be used:
 - not-working
 - bug-reported
 - fixes
 
-## Merge ramas Principales
+## Merges to Primary Branches
 
-Para la unión de las ramas principales se harán de la siguiente forma.
+Merges going into the primary branches are to be performed in the following way.
 
-merge desde las ramas secundarios a development
+**Merges from secondary branches into development**
 
-ejemplo:
+Example:
 ```sh
-(development)$ git merge feature-report
+(development)$ git merge feature-reports
 ```
 
-Merge desde development a staging
+**Merges from *development* into *staging***
 
-ejemplo:
+Example:
 ```sh
 (staging)$ git merge development
 ```
-Merge desde staging a production (Solo project manager)
+
+**Merge from *staging* into *master*** *(Only Project Manager)*
+
+Example:
 ```sh
-(production)$ git merge staging
+(master)$ git merge staging
 ```
 
-## Corrección de errores en staging
+## Bug Fixes and Patches in *staging*
 
-Los errores de staging son los descubiertos por los usuarios finales y deben de ser resueltos directos en el staging esta es una excepción dentro de los push online. Las ramas deben de comenzar con hotfix- para que sean fácilmente identificado como correcciones en staging.
+Errors discovered in *staging* by end users are to be resolved directly by branching *staging*. This is an exception to pushes into primary branches. Branch names must have the prefix *hotfix-* so that these are easily identified as corrections to *staging*.
 
-Pasos:
-
-1 - Crear una rama desde staging
-
+*Steps:*
+1. Creating a branch from *staging*
 ```sh
 (staging)$ git branch hotfix-something
 ```
 
-2 -  Corregir y hacer merge desde la rama creada a staging
-
+2. Correct and merge the branch created from *staging*
 ```sh
 (staging)$ git merge hotfix-something
 ```
 
-3 - merge desde development a staging ya corregido
-
+3. Merge fixes into *master* and into *development*
 ```sh
+(master)$ git merge staging 
 (development)$ git merge staging 
 ```
 
-## Cambios grandes
+## Important Changes
 
-Si el sistema tendrá un cambio grande se debe crear una rama, este nueva rama se nombrara "rama-pre/post-cambio" para recuperar los cambios si es necesario.
+If the application will suffer drastic changes a new branch must be created. This new branch will be named *"&lt;branch&gt;-pre-/&lt;branch&gt;-post-"* in order to recover any changes, should it be necessary.
 
-ejemplos:
+Examples:
 ```
-  development-pre-vueToPhalcon
-  development-post-mandrill
-```
-
-## Mensajes de los commits
-
-Al hacer commit agregar descripción detallada de los cambios realizados, si estos cambios están respaldados por un task en Jira colocar delante el KEY del task separando con un guión (-) de la descripción.
-
->Getting in the habit of creating quality commit messages makes using and collaborating with Git a lot easier. As a general rule, your messages should start with a single line that’s no more than about 50 characters and that describes the changeset concisely, followed by a blank line, followed by a more detailed explanation. The Git project requires that the more detailed explanation include your motivation for the change and contrast its implementation with previous behavior – this is a good guideline to follow. It’s also a good idea to use the imperative present tense in these messages. In other words, use commands. Instead of “I added tests for” or “Adding tests for,” use “Add tests for.” 
-
-Fuente: [Contributing to a Project](https://git-scm.com/book/ch5-2.html)
-
-Ejemplos
-
-```
-	(development)$ git commit -m 'OOD-151 - Correcting problems with login'
+development-pre-vue
+development-post-mandrill
 ```
 
-# Versión
+## Messages in commits
 
-MCTekk trabajara con el Versionado Semántico [semver](http://semver.org/lang/es/) (mayor.menor.parche)
+When committing a concise description of the changes have to be added. If these changes are tied to a task in JIRA a relationship can be defined by adding the task key separated by a dash with spaces ( - ) before the description.
 
-- mayor: el software sufre grandes cambios y mejoras.
-- menor: se agrega un nuevo feature.
-- parche: se aplican correcciones de errores.
+>Getting in the habit of creating quality commit messages makes using and collaborating with Git a lot easier. As a general rule, your messages should start with a single line that’s no more than about 50 characters and that describes the changeset concisely, followed by a blank line, followed by a more detailed explanation. The Git project requires that the more detailed explanation include your motivation for the change and contrast its implementation with previous behavior – this is a good guideline to follow. It’s also a good idea to use the imperative present tense in these messages. In other words, use commands. Instead of "I added tests for" or "Adding tests for," use "Add tests for." 
 
-Estas serán trabajadas y asignadas conjuntas a los realeses de los proyectos.
+_**Source:** [Contributing to a Project](https://git-scm.com/book/ch5-2.html)_
 
-ejemplo:
-- 1.0.0 Primera salida del proyecto alpha
-- 1.0.1 Cambio rápido/Corrección de errores
-- 1.1.0 New feature
-- 1.2.5 New feature y corrección de errores
+Examples:
+```
+(development)$ git commit -m "PRJ-151 - Correcting problems with login."
+```
 
-Los realeses y las versiones saldrán al finalizar los sprint
+# Versioning
+
+We will be working with Semantic Versioning 2.0.0 ([semver](http://semver.org) [MAJOR.MINOR.PATCH])
+
+1. MAJOR version when you make incompatible API changes,
+2. MINOR version when you add functionality in a backwards-compatible manner, and
+3. PATCH version when you make backwards-compatible bug fixes.
+
+These will be assigned to project releases.
+
+Examples:
+* 1.0.0 - First alpha release of the project.
+* 1.0.1 - Quick changes / bug fixes
+* 1.1.0 - New feature
+* 1.2.5 - New feature and bug fixes
+
+Releases with versioning will be published at the end of each sprint, unless any specific conditions prevent from doing so.
 
 # FAQ
 
-**Quien pude subir los cambios a producción?**
+#### Who can push changes into production (*master*)?
+Project Managers or assigned personnel are the only ones allowed to push changes into production.
 
-Solos los project manager pueden subir cambios a producción o personas que se les asigne esta tarea. 
+#### Can emergency fixes be pushed into production without the presence of the Project Manager?
+* Emergency fixes should NEVER be pushed into production. All changes must go through *development* or *staging* (in case of hotfixes).
+* The responsibility of having these changes pushed into production fall entirely under the Project Manager. Should the PM not be available you can seek help from someone else with the authority to do suck tasks in order to reach a solution.
 
-**Si tengo un cambio pequeño debo crear una rama?**
+#### I have conflicts with a branch because someone else uploaded one the same name, what should I do?
+Change the name of your branch by adding a suffix **bk**_(backend)_ or **ft**_(frontend)_ while maintaining the already established branch naming guidelines.
 
-No es necesario, puedes trabajarlo en una rama (secundario) que tenga que ver con el feature que estés corrigiendo.
-
-**Si tengo un cambio considerable debe crear una rama?**
-
-Si, pero este solo debe de ser local y unido a uno que ya se encuentre online (secundarios). Esto es para evitar que la data de una rama secundario se vea comprometida directamente.
-
-**Si hay un cambio de urgencia en la rama de producción y no esta el project manager puedo subir el cambio?**
-
-- En producción nunca debe de llegar un cambio de urgencia, todos los cambios deben pasar por development y luego staging para evitar que esto pase.
-- La responsabilidad es enteramente directa al project manager, en caso de que este no se encuentre buscar a otro compañero con la misma posición para buscar una solución.
-
-**Tengo conflictos con una rama ya que alguien mas publicó uno con el mismo nombre, que hago?**
-
-Cambia el nombre a la rama para mantener la misma línea nombra la rama con el mismo nombre agregando le bk(backend) o ft(frontend)
-
+Example:
 ```sh
-git branch -m feature-report feature-report-bk // git branch -m old_branch new_branch
+git branch -m feature-reports feature-reports-bk
 ```
 
-**Qué pasa si subo una rama temporal?**
-
-Este debe de ser eliminado para evitar tener una cantidad grande de ramas en los repositorios online.
+#### What happens if I upload a temporary branch?
+Any uploaded temporary branches must be deleted in order to avoid having an overwhelming amount of branches in the online repository.
